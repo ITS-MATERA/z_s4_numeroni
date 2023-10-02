@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<library xmlns="http://www.sap.com/sap.ui.library.xsd">
+	<name>custZnumeroNI.zNumeroNILibrary</name>
+	<vendor>Innovates</vendor>
+	<version>${version}</version>
+	<copyright>${copyright}</copyright>
+	<title>zNumeroNILibrary</title>
+	<documentation>Some description about zNumeroNILibrary</documentation>
+	<dependencies>
+		<dependency>
+			<libraryName>sap.ui.core</libraryName>
+		</dependency>
+	</dependencies>
+</library>
