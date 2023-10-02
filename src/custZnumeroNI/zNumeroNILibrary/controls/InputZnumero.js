@@ -130,7 +130,7 @@ sap.ui.define(['jquery.sap.global',
             filters.push(new Filter({path: "Zamministr",operator: FilterOperator.EQ,value1: model.Amministrazione}));  
 
           if(model.Ragioneria && model.Ragioneria !== "")
-            filters.push(new Filter({path: "ZRagioCompe",operator: FilterOperator.Contains,value1: model.Ragioneria}));  
+            filters.push(new Filter({path: "ZRagioCompe",operator: FilterOperator.EQ,value1: model.Ragioneria}));  
 
           if(model.Progressivo && model.Progressivo !== "")
             filters.push(new Filter({path: "ZidNi",operator: FilterOperator.EQ,value1: model.Progressivo}));
