@@ -20,22 +20,19 @@ sap.ui.define(['jquery.sap.global',
 						type: "string",
 						defaultValue: ""
 					},
-          value: {
-						type: "string",
-						defaultValue: ""
-					},
-          bukrs: {
-						type: "string",
-						defaultValue: ""
-					},
-          key:{
-            type: "string",
-            defaultValue:""
-          },
-          showValueHelp:{
-            type:"string",
-            defaultValue:"true"
-          }
+          bukrs: { type: "string", defaultValue: "" },
+          esercizio: { type: "string", defaultValue: "" },
+          amministrazione: { type: "string", defaultValue: "" },
+          ragioneria: { type: "string", defaultValue: "" },
+          value: { type: "string", defaultValue: "" }, // progressivo ZID_NI 
+          identificativo: { type: "string", defaultValue: "" },
+          progressivoNI: { type: "string", defaultValue: "" },
+          role: { type: "string", defaultValue: "" },
+          fikrs:{ type: "string", defaultValue: "" },
+          prctr:{ type: "string", defaultValue: "" },
+          
+          key:{ type: "string", defaultValue:"" },
+          showValueHelp:{ type:"string", defaultValue:"true" }
 				},
 				aggregations: {},
 				events: {},
@@ -50,11 +47,11 @@ sap.ui.define(['jquery.sap.global',
         var self=this;
 				// this.bRendering = false;
 				Input.prototype.init.call(this);  
-        self.attachValueHelpRequest(self._libOnShowDialogTipo);  
-        self.attachSubmit(self._libOnSubmitTipo);  
+        self.attachValueHelpRequest(self._libOnShowDialog);  
+        self.attachSubmit(self._libOnSubmitNumero);  
 			},
 
-      _libOnSubmitTipo:function(oEvent){
+      _libOnSubmitNumero:function(oEvent){
         var self =this;
         if(!self.getValue() || self.getValue() === null || self.getValue()===""){
           self.setValue(null);
@@ -70,52 +67,53 @@ sap.ui.define(['jquery.sap.global',
         var self =this;
       },
 
-      _libOnShowDialogTipo:function(oEvent){
+      _libOnShowDialog:function(oEvent){
         console.log(oEvent);
         var self =this;
         var oModelJson = new JSONModel({
           PanelFilterVisible:true,
           PanelContentVisible:false,
-          Bukrs:self.getBukrs(),
-          CodTitolo:null,
-          CodTipologia:null,
-          DescTipologia:null,
-          CodSottotipologia1Liv:null,
-          DescSottotipologia1Liv:null,
-          TipoResults:[]
+          Bukrs:self.getBukrs() && self.getBukrs() !=="" ? self.getBukrs() : null,
+          Esercizio:self.getEsercizio() && self.getEsercizio() !=="" ? self.getEsercizio() : null,
+          Amministrazione: self.getAmministrazione() && self.getAmministrazione() !=="" ? self.getAmministrazione() : null,
+          Ragioneria:self.getRagioneria() && self.getRagioneria() !=="" ? self.getRagioneria() : null,
+          Progressivo:self.getValue() && self.getValue() !=="" ? self.getValue() : null, 
+          Identificativo:self.getIdentificativo() && self.getIdentificativo() !=="" ? self.getIdentificativo() : null,          
+          ProgressivoNI: self.getProgressivoNI() && self.getProgressivoNI() !=="" ? self.getProgressivoNI() : null,
+          Results:[]
         });
 
         self._libGetViewId(self,function(callback) {
-          if(!self._libTipoDialog){
-            self._libTipoDialog = Fragment.load({
+          if(!self._libNumeroDialog){
+            self._libNumeroDialog = Fragment.load({
               id: callback.Id,
-              name: "custZtipo.zTipoLibrary.fragment._libTipoDialog",
+              name: "custZnumeroNI.zNumeroNILibrary._libNumDialog",
               controller: self
             }).then(function(oDialog){
               return oDialog;
             }.bind(this));
           }  
-          self._libTipoDialog.then(function(oDialog){
-            oDialog.setModel(oModelJson, MODEL_TIPO_ENTITY);
+          self._libNumeroDialog.then(function(oDialog){
+            oDialog.setModel(oModelJson, MODEL_ENTITY);
             oDialog.open();
           });
         });
       },
 
-      _libOnCloseTipoDialog:function(oEvent){
+      _libOnCloseNumeroDialog:function(oEvent){
         var self = this;
-        self._libTipoDialog.then(function(oDialog){
+        self._libNumeroDialog.then(function(oDialog){
           oDialog.close();
           oDialog.destroy();
-          self._libTipoDialog=null;
+          self._libNumeroDialog=null;
         });
       },
 
-      _libOnSearchTipoDialog:function(oEvent){
+      _libOnSearchNumeroDialog:function(oEvent){
         var self = this,
           filters = [],  
-          entity = oEvent.getSource().getParent().getModel(MODEL_TIPO_ENTITY),
-          model = oEvent.getSource().getParent().getModel(MODEL_TIPO_ENTITY).getData();
+          entity = oEvent.getSource().getParent().getModel(MODEL_ENTITY),
+          model = oEvent.getSource().getParent().getModel(MODEL_ENTITY).getData();
 
           self._globalModelHelperHelper = new sap.ui.model.odata.v2.ODataModel({
             // serviceUrl: "/sap/opu/odata/sap/ZS4_NOTEIMPUTAZIONI_SRV/"
@@ -125,68 +123,84 @@ sap.ui.define(['jquery.sap.global',
           if(model.Bukrs && model.Bukrs !== "")
             filters.push(new Filter({path: "Bukrs",operator: FilterOperator.EQ,value1: model.Bukrs}));
 
-          if(model.CodTitolo && model.CodTitolo !== "")
-            filters.push(new Filter({path: "ZcodTitolo",operator: FilterOperator.EQ,value1: model.CodTitolo}));  
+          if(model.Esercizio && model.Esercizio !== "")
+            filters.push(new Filter({path: "Gjahr",operator: FilterOperator.EQ,value1: model.Esercizio}));  
           
-          if(model.CodTipologia && model.CodTipologia !== "")
-            filters.push(new Filter({path: "ZcodTipologia",operator: FilterOperator.EQ,value1: model.CodTipologia}));  
+          if(model.Amministrazione && model.Amministrazione !== "")
+            filters.push(new Filter({path: "Zamministr",operator: FilterOperator.EQ,value1: model.Amministrazione}));  
 
-          if(model.DescTipologia && model.DescTipologia !== "")
-            filters.push(new Filter({path: "Ztipologia",operator: FilterOperator.Contains,value1: model.DescTipologia}));  
+          if(model.Ragioneria && model.Ragioneria !== "")
+            filters.push(new Filter({path: "ZRagioCompe",operator: FilterOperator.Contains,value1: model.Ragioneria}));  
 
-          if(model.CodSottotipologia1Liv && model.CodSottotipologia1Liv !== "")
-            filters.push(new Filter({path: "ZcodTipo",operator: FilterOperator.EQ,value1: model.CodSottotipologia1Liv}));
+          if(model.Progressivo && model.Progressivo !== "")
+            filters.push(new Filter({path: "ZidNi",operator: FilterOperator.EQ,value1: model.Progressivo}));
           
-          if(model.DescSottotipologia1Liv && model.DescSottotipologia1Liv !== "")
-            filters.push(new Filter({path: "Ztipo",operator: FilterOperator.EQ,value1: model.DescSottotipologia1Liv}));
+          if(model.Identificativo && model.Identificativo !== "")
+            filters.push(new Filter({path: "ZidSubni",operator: FilterOperator.EQ,value1: model.Identificativo}));
+
+          if(model.ProgressivoNI && model.ProgressivoNI !== "")
+            filters.push(new Filter({path: "ZchiaveNi",operator: FilterOperator.EQ,value1: model.ProgressivoNI}));
           
           console.log(self._globalModelHelperHelper);
           var oDataModel = self._globalModelHelperHelper;
 
-          self._globalModelHelperHelper.metadataLoaded().then(function() {
-            oDataModel.read("/ZhfTipoSet" , {
-                filters: filters,    
-                success: function(data, oResponse){
-                  // console.log(data);
-                  entity.setProperty("/TipoResults",data.results);
-                  entity.setProperty("/PanelFilterVisible",false);
-                  entity.setProperty("/PanelContentVisible",true);
-              },
-              error: function(error){
-                console.log(error);
-              }
+          if(self._libNumeroDialog){
+            self._libNumeroDialog.then(function(oDialog){
+              
+            oDialog.setBusy(true);
+            self._globalModelHelperHelper.metadataLoaded().then(function() {
+              oDataModel.read("/ZhfNotaimpSet" , {
+                  filters: filters,   
+                  urlParameters: { 
+                    AuthorityRole: self.getRole(),
+                    AuthorityFikrs: self.getFikrs(),
+                    AuthorityPrctr: self.getPrctr(),
+                  }, 
+                  success: function(data, oResponse){
+                    console.log(data);
+                    entity.setProperty("/Results",data.results);
+                    entity.setProperty("/PanelFilterVisible",false);
+                    entity.setProperty("/PanelContentVisible",true);
+                    oDialog.setBusy(false);
+                },
+                error: function(error){
+                  oDialog.setBusy(false);
+                  console.log(error);
+                }
+              });
             });
           });
+        }  
+        
       },
 
-      _libOnConfirmTipoDialog:function(oEvent){
+      _libOnConfirmNumeroDialog:function(oEvent){
         var self =this;
         self._libGetViewId(self,function(callback) {
           var oView = callback.oView;
-          var table = oView.byId("_libTableTipo");
+          var table = oView.byId("_libTableNumero");
           var selectedItem = table.getSelectedItem();
           
-          var key = selectedItem.data("ZcodTipo");
-          var text = selectedItem.data("Ztipo");
-          // console.log(key + " - " + text);//TODO:da canc
+          var key = selectedItem.data("ZchiaveSubni");
+          var text = selectedItem.data("ZchiaveSubni");
 
           self.setKey(key);  
-          self.setValue(text + " - " + key);
+          self.setValue(text);
           
-          if(self._libTipoDialog){
-            self._libTipoDialog.then(function(oDialog){
+          if(self._libNumeroDialog){
+            self._libNumeroDialog.then(function(oDialog){
               oDialog.close();
               oDialog.destroy();
-              self._libTipoDialog=null;
+              self._libNumeroDialog=null;
             });
           }
         });
       },
 
-      _libOnBackTipoDialog:function(oEvent){
+      _libOnBackNumeroDialog:function(oEvent){
         var self = this,
-          entity = oEvent.getSource().getParent().getModel(MODEL_TIPO_ENTITY);
-        entity.setProperty("/TipoResults",[]);
+          entity = oEvent.getSource().getParent().getModel(MODEL_ENTITY);
+        entity.setProperty("/Results",[]);
         entity.setProperty("/PanelFilterVisible",true);
         entity.setProperty("/PanelContentVisible",false);
       },

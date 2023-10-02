@@ -26,53 +26,17 @@ sap.ui.define([
 		elements: [],
 		noLibraryCSS: false // if no CSS is provided, you can disable the library.css load here
 	});
-
-
-	// controls: [
-	// 	"custZtipo.zTipoLibrary.Example"
-	// ],	
-	// types: [
-	// 	"custZtipo.zTipoLibrary.ExampleColor"
-	// ],
-	// "custZtipo.zTipoLibrary.Example"
-	
-	
-	
-	
-	
 	
 	/**
 	 * Some description about <code>zTipoLibrary</code>
 	 *
 	 * @namespace
-	 * @name custZtipo.zTipoLibrary
+	 * @name custZnumeroNI.zNumeroNILibrary
 	 * @author Innovates
 	 * @version ${version}
 	 * @public
 	 */
 	var thisLib = custZnumeroNI.zNumeroNILibrary;
-
-	/**
-	 * Semantic Colors of the <code>custZtipo.zTipoLibrary.Example</code>.
-	 *
-	 * @enum {string}
-	 * @public
-	 */
-	// thisLib.ExampleColor = {
-
-	// 	/**
-	// 	 * Default color (brand color)
-	// 	 * @public
-	// 	 */
-	// 	Default : "Default",
-
-	// 	/**
-	// 	 * Highlight color
-	// 	 * @public
-	// 	 */
-	// 	Highlight : "Highlight"
-
-	// };
 
 	return thisLib;
 
