@@ -32,7 +32,8 @@ sap.ui.define(['jquery.sap.global',
           prctr:{ type: "string", defaultValue: "" },
           
           key:{ type: "string", defaultValue:"" },
-          showValueHelp:{ type:"string", defaultValue:"true" }
+          showValueHelp:{ type:"string", defaultValue:"true" },
+          maxLength:{ type:"string", defaultValue:"24" }
 				},
 				aggregations: {},
 				events: {},
@@ -68,7 +69,6 @@ sap.ui.define(['jquery.sap.global',
       },
 
       _libOnShowDialog:function(oEvent){
-        console.log(oEvent);
         var self =this;
         var oModelJson = new JSONModel({
           PanelFilterVisible:true,
@@ -80,6 +80,12 @@ sap.ui.define(['jquery.sap.global',
           Progressivo:self.getValue() && self.getValue() !=="" ? self.getValue() : null, 
           Identificativo:self.getIdentificativo() && self.getIdentificativo() !=="" ? self.getIdentificativo() : null,          
           ProgressivoNI: self.getProgressivoNI() && self.getProgressivoNI() !=="" ? self.getProgressivoNI() : null,
+
+          Role: self.getRole() && self.getRole() !=="" ? self.getRole() : null,
+          Fikrs: self.getFikrs() && self.getFikrs() !=="" ? self.getFikrs() : null,
+          Prctr: self.getPrctr() && self.getPrctr() !=="" ? self.getPrctr() : null,
+
+
           Results:[]
         });
 
@@ -138,11 +144,10 @@ sap.ui.define(['jquery.sap.global',
           if(model.Identificativo && model.Identificativo !== "")
             filters.push(new Filter({path: "ZidSubni",operator: FilterOperator.EQ,value1: model.Identificativo}));
 
-          console.log(model.ProgressivoNI) ; 
           if(model.ProgressivoNI && model.ProgressivoNI !== "")
             filters.push(new Filter({path: "ZchiaveNi",operator: FilterOperator.EQ,value1: model.ProgressivoNI}));
           
-          console.log(self._globalModelHelperHelper);
+          // console.log(self._globalModelHelperHelper);
           var oDataModel = self._globalModelHelperHelper;
 
           if(self._libNumeroDialog){
@@ -158,7 +163,7 @@ sap.ui.define(['jquery.sap.global',
                     AuthorityPrctr: self.getPrctr(),
                   }, 
                   success: function(data, oResponse){
-                    console.log(data);
+                    // console.log(data);
                     entity.setProperty("/Results",data.results);
                     entity.setProperty("/PanelFilterVisible",false);
                     entity.setProperty("/PanelContentVisible",true);
@@ -171,8 +176,7 @@ sap.ui.define(['jquery.sap.global',
               });
             });
           });
-        }  
-        
+        }          
       },
 
       _libOnConfirmNumeroDialog:function(oEvent){
@@ -182,11 +186,16 @@ sap.ui.define(['jquery.sap.global',
           var table = oView.byId("_libTableNumero");
           var selectedItem = table.getSelectedItem();
           
-          var key = selectedItem.data("ZchiaveSubni");
-          var text = selectedItem.data("ZchiaveSubni");
-
-          self.setKey(key);  
-          self.setValue(text);
+          if(selectedItem){
+            var key = selectedItem.data("ZchiaveSubni");
+            var text = selectedItem.data("ZchiaveSubni");
+            self.setKey(key);  
+            self.setValue(text);
+          }
+          else{
+            self.setKey(null);  
+            self.setValue(null);
+          }
           
           if(self._libNumeroDialog){
             self._libNumeroDialog.then(function(oDialog){

@@ -2,6 +2,7 @@
 	xmlns="sap.m"
   xmlns:l="sap.ui.layout"
 	xmlns:core="sap.ui.core"
+  xmlns:zprogrnilibrary="custprogrni.zprogrnilibrary.controls"
   xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
   <Dialog title="Numero NI" >
     <content>
@@ -20,13 +21,33 @@
             <Input value="{EntityModel>/Ragioneria}"  maxLength="4"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
 
             <Label text="Progressivo:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/Progessivo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Input value="{EntityModel>/Progessivo}" maxLength="2"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
                       
             <Label text="Identificativo NI:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/Identificativo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
-           
-            <Label text="Progressivo NI:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/ProgressivoNI}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>           
+            <Input value="{EntityModel>/Identificativo}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+
+            <VBox>
+              <Label text="Progressivo NI:" ></Label>
+              <layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData>
+            </VBox>
+            <VBox>
+              <zprogrnilibrary:InputZProgressivo  
+                bukrs="{EntityModel>/Bukrs}"
+                esercizio=""
+                amministrazione=""
+                ragioneria=""
+                capitolo=""
+                oggettoSpesa=""
+                value="{EntityModel>/ProgressivoNI}"  
+                role= "{EntityModel>/Role}"
+                fikrs="{EntityModel>/Fikrs}"
+                prctr="{EntityModel>/Prctr}"
+                openInDialog="X"
+                key="{EntityModel>/ProgressivoNI}">      
+              </zprogrnilibrary:InputZProgressivo>  
+              <layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData> 
+            </VBox>
+
          </l:Grid>
       </Panel>
     <Panel visible="{EntityModel>/PanelContentVisible}">
