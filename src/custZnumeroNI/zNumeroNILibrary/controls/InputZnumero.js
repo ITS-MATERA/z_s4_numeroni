@@ -138,6 +138,7 @@ sap.ui.define(['jquery.sap.global',
           if(model.Identificativo && model.Identificativo !== "")
             filters.push(new Filter({path: "ZidSubni",operator: FilterOperator.EQ,value1: model.Identificativo}));
 
+          console.log(model.ProgressivoNI) ; 
           if(model.ProgressivoNI && model.ProgressivoNI !== "")
             filters.push(new Filter({path: "ZchiaveNi",operator: FilterOperator.EQ,value1: model.ProgressivoNI}));
           

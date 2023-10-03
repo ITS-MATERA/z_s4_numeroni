@@ -26,7 +26,7 @@
             <Input value="{EntityModel>/Identificativo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
            
             <Label text="Progressivo NI:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/ZchiaveNi}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>           
+            <Input value="{EntityModel>/ProgressivoNI}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>           
          </l:Grid>
       </Panel>
     <Panel visible="{EntityModel>/PanelContentVisible}">
