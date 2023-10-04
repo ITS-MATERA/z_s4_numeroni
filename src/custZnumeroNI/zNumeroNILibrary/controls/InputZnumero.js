@@ -30,7 +30,7 @@ sap.ui.define(['jquery.sap.global',
           role: { type: "string", defaultValue: "" },
           fikrs:{ type: "string", defaultValue: "" },
           prctr:{ type: "string", defaultValue: "" },
-          
+          semanticObject:{type: "string", defaultValue: ""},
           key:{ type: "string", defaultValue:"" },
           showValueHelp:{ type:"string", defaultValue:"true" },
           maxLength:{ type:"string", defaultValue:"24" }
@@ -161,6 +161,7 @@ sap.ui.define(['jquery.sap.global',
                     AuthorityRole: self.getRole(),
                     AuthorityFikrs: self.getFikrs(),
                     AuthorityPrctr: self.getPrctr(),
+                    SemanticObject: self.getSemanticObject()
                   }, 
                   success: function(data, oResponse){
                     // console.log(data);
