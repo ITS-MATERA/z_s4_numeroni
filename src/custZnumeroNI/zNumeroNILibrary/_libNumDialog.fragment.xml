@@ -9,10 +9,10 @@
       <Panel  visible="{EntityModel>/PanelFilterVisible}" >
         <l:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0">            
             <Label text="Ente:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/Bukrs}"  enabled="false" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Input value="{EntityModel>/Bukrs}" maxLength="4" enabled="false" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
                         
             <Label text="Esercizio:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/Eserciizo}"  maxLength="4" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Input value="{EntityModel>/Esercizio}"  maxLength="4" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
            
             <Label text="Amministrazione:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
             <Input value="{EntityModel>/Amministrazione}"  maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
@@ -42,6 +42,7 @@
                 role= "{EntityModel>/Role}"
                 fikrs="{EntityModel>/Fikrs}"
                 prctr="{EntityModel>/Prctr}"
+                semanticObject="{EntityModel>/SemanticObject}"
                 openInDialog="X"
                 key="{EntityModel>/ProgressivoNI}">      
               </zprogrnilibrary:InputZProgressivo>  

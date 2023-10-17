@@ -80,12 +80,10 @@ sap.ui.define(['jquery.sap.global',
           Progressivo:self.getValue() && self.getValue() !=="" ? self.getValue() : null, 
           Identificativo:self.getIdentificativo() && self.getIdentificativo() !=="" ? self.getIdentificativo() : null,          
           ProgressivoNI: self.getProgressivoNI() && self.getProgressivoNI() !=="" ? self.getProgressivoNI() : null,
-
           Role: self.getRole() && self.getRole() !=="" ? self.getRole() : null,
           Fikrs: self.getFikrs() && self.getFikrs() !=="" ? self.getFikrs() : null,
           Prctr: self.getPrctr() && self.getPrctr() !=="" ? self.getPrctr() : null,
-
-
+          SemanticObject:self.getSemanticObject() && self.getSemanticObject() !=="" ? self.getSemanticObject() : null,
           Results:[]
         });
 
