@@ -21,7 +21,7 @@
             <Input value="{EntityModel>/Ragioneria}"  maxLength="4"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
 
             <Label text="Progressivo:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModel>/Progessivo}" maxLength="2"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Input value="{EntityModel>/Progressivo}" maxLength="2"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
                       
             <Label text="Identificativo NI:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
             <Input value="{EntityModel>/Identificativo}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
