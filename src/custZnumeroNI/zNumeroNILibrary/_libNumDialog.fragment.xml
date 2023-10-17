@@ -56,7 +56,8 @@
         items="{
           path: 'EntityModel>/Results'
         }"
-        mode="SingleSelectMaster"
+        mode="SingleSelectLeft"
+        includeItemInSelection="true"
         growing="true"
         width="auto"> 
         <columns>
